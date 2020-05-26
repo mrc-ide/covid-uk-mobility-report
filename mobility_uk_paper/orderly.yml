@@ -1,0 +1,57 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: plots for paper
+      filenames:
+        - plots/paper_maps.png
+        - plots/city_country_plot.png
+        - plots/rural_urban_plot.png
+        - plots/journey_length_distributions.png
+        - plots/population_density_map.png
+        - plots/facebook_population_by_density_quartile.png
+
+resources:
+  - data/lads.rds
+  - data/shp_lad.rds
+
+depends:
+  mobility_uk_fb_incoming:
+    id: latest
+    use:
+      movement_per_lad.rds: movement_per_lad.rds
+      movement_per_tile.rds: movement_per_tile.rds
+  mobility_incoming_uk_fb_population:
+    id: latest
+    use:
+      uk_facebook_population_per_tile.rds: uk_facebook_population_per_tile.rds
+  mobility_incoming_uk_mno1:
+        id: latest
+        use:
+            uk_movement_data.rds: output/uk_movement_data.rds
+
+packages:
+ - plyr
+ - dplyr
+ - ggplot2
+ - sf
+ - cyphr
+ - snakecase
+ - RColorBrewer
+ - reshape2
+ - stringr
+ - janitor
+
+sources:
+  - R/import_data.R
+  - R/plot_theme.R
+  - R/format_data.R
+  - R/figure_1.R
+  - R/figure_2.R
+  - R/figure_4.R
+  - R/figure_5.R
+  - R/supporting_info.R
+
+requester: IC
+author: Ben Jeffrey
+
