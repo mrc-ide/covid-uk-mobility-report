@@ -1,0 +1,66 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: AICc for each model
+      filenames:
+        - output/AICcValues.csv
+  - data:
+      description: List of permutations for all models and the models
+      filenames:
+        - output/Model0.rds
+        - output/Model1.rds
+        - output/Model2.rds
+        - output/Model3.rds
+        - output/Model4.rds
+        - output/Model5.rds
+        - output/Model6.rds
+        - output/ModelFit1.rds
+        - output/ModelFit2.rds
+        - output/ModelFit3.rds
+        - output/ModelFit4.rds
+        - output/ModelFit5.rds
+        - output/ModelFit6.rds
+  - staticgraph:
+      description: Break Point graphs for zero to five breakpoints
+      filenames:
+        - plots/BreakPoint4.pdf
+
+packages:
+  - knitr
+  - MuMIn
+  - grid
+  - car
+  - ggplot2
+  - cowplot
+  - snakecase
+  - readr
+  - plyr
+  - ggplot2
+  - stringr
+  - sf
+  - raster
+  - scales
+  - MASS
+  - logNormReg
+
+
+sources:
+  - R/plot_theme.R
+  - R/plot_functions.R
+  - R/data_prep_functions.R
+  
+resources:
+  - data/lads.rds
+
+depends:
+  mobility_uk_fb_incoming:
+    id: latest
+    use: 
+      movement_per_lad.rds: movement_per_lad.rds
+
+global_resources:
+  word_style.docx: word_style.docx
+
+requester: WHO
+author: IC
